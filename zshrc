@@ -72,6 +72,14 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colorize)
 
+
+# Auto-start SSH agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
+fi
+
+
 source $ZSH/oh-my-zsh.sh
 
 # MP3 download (best quality)
